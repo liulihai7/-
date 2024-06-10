@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登录</title>
+	<style>
+		.password-container {
+		    text-align: center;
+		    margin-top: 20%;
+		}
+		
+		.password-error {
+		    color: red;
+		    text-align: center;
+		    margin-top: 10px;
+		} 
+		   
+		body, html {
+		    margin: 0;
+		    padding: 0;
+		    overflow: hidden;
+		    height: 100%;
+		}
+		
+		p {
+		    position: absolute;
+		    color: #A1FFCE;
+		    font-size: 18px;
+		    white-space: nowrap;
+		    transition: transform 3s ease-in-out; /* 添加过渡效果，持续2秒，缓动函数为 ease-in-out */
+		}
+		
+	</style>
+</head>
+<body>
+	<div id="password-form" class="password-container">
+    <h2>请输入对应密码以继续：</h2>
+    <form id="loginForm" onsubmit="return login()">
+        <label for="password"></label>
+        <input type="password" id="password" name="password" required>
+        <button type="submit">登录</button>
+    </form>
+	<p id="movingText">嘿嘿帅哥</p>
+	</div>
+    <script>
+        function login() {
+            var password = document.getElementById("password").value;
+
+            // 根据输入的不同密码，跳转到不同的网站
+            switch (password) {
+                case "zr":
+                    window.location.href = "zr.html";
+                    break;
+                case "jp":
+                    window.location.href = "jp.html";
+                    break;
+					case "bpsg":
+					    window.location.href = "bpsg.html";
+					    break;
+                default:
+                    alert("Invalid password. Please try again.");
+                    return false; // 阻止表单提交
+            }
+
+            return false; // 阻止表单提交
+        }
+		
+		//文字移动
+		var movingText = document.getElementById('movingText');
+		
+		function moveTextRandomly() {
+		    var windowWidth = window.innerWidth;
+		    var windowHeight = window.innerHeight;
+		
+		    var startX = Math.floor(Math.random() * windowWidth) + 'px';
+		    var startY = Math.floor(Math.random() * windowHeight) + 'px';
+		    var endX = Math.floor(Math.random() * windowWidth) + 'px';
+		    var endY = Math.floor(Math.random() * windowHeight) + 'px';
+		
+		    movingText.style.transform = `translate(${endX}, ${endY})`; /* 直接设置目标位置 */
+		
+		    // 使用 setTimeout 来触发下一次移动
+		    setTimeout(() => {
+		        movingText.style.transform = `translate(${startX}, ${startY})`; /* 返回起始位置 */
+		    }, 3000); // 延迟2秒执行，与过渡效果持续时间一致
+		}
+		
+		// 调用函数开始动画
+		moveTextRandomly();
+		
+		// 设置定时器，每隔一段时间执行一次移动
+		setInterval(moveTextRandomly, 5000); // 每隔4秒执行一次移动
+    </script>
+</body>
+</html>
